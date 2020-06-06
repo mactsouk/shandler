@@ -20,6 +20,7 @@ type V2Input struct {
 	U        User   `json:"load"`
 }
 
+// IMAGESPATH defines the path where binary files are stored
 var IMAGESPATH string
 
 func AddHandlerV2(rw http.ResponseWriter, r *http.Request) {
