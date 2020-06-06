@@ -12,8 +12,15 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// @title Authentication Swagger API
+// @version 1.0
+// @description Swagger API for Go Project Login Server.
+// @termsOfService http://swagger.io/terms/
+
 var SQLFILE = "/tmp/users.db"
 
+// User defines the structure for a Full User Record
+// swagger:model
 type User struct {
 	ID        int    `json:"id"`
 	Username  string `json:"user"`
