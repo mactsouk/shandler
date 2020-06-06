@@ -17,27 +17,67 @@ import (
 // @description Swagger API for Go Project Login Server.
 // @termsOfService http://swagger.io/terms/
 
+// SQLFILE defines the path of the SQLite3 database
 var SQLFILE = "/tmp/users.db"
 
 // User defines the structure for a Full User Record
 // swagger:model
 type User struct {
-	ID        int    `json:"id"`
-	Username  string `json:"user"`
-	Password  string `json:"password"`
-	LastLogin int64  `json:"lastlogin"`
-	Admin     int    `json:"admin"`
-	Active    int    `json:"active"`
-}
-
-type Input struct {
+	// The ID for the User
+	//
+	// required: false
+	// min: 1
+	ID int `json:"id"`
+	// The Username of the User
+	//
+	// required: true
 	Username string `json:"user"`
+	// The Password of the User
+	//
+	// required: true
 	Password string `json:"password"`
-	Admin    int    `json:"admin"`
+	// The Last Login time of the User
+	//
+	// required: true
+	// min: 0
+	LastLogin int64 `json:"lastlogin"`
+	// Is the User Admin or not
+	//
+	// required: true
+	Admin int `json:"admin"`
+	// Is the User Logged In or Not
+	//
+	// required: true
+	Active int `json:"active"`
 }
 
+// Input defines the structure for the user issuing a command
+// swagger:model
+type Input struct {
+	// The Username of the User
+	//
+	// required: true
+	Username string `json:"user"`
+	// The Password of the User
+	//
+	// required: true
+	Password string `json:"password"`
+	// Is the User Admin or not
+	//
+	// required: true
+	Admin int `json:"admin"`
+}
+
+// UserPass defines the structure for the user issuing a command
+// swagger:model
 type UserPass struct {
+	// The Username of the User
+	//
+	// required: true
 	Username string `json:"user" validate:"required"`
+	// The Password of the User
+	//
+	// required: true
 	Password string `json:"password" validate:"required"`
 }
 
