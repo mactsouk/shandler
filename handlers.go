@@ -1,4 +1,4 @@
-// Package shandler for Authentication Server
+// Package shandler For the Authentication Server
 //
 // Documentation for REST API
 //

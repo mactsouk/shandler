@@ -187,7 +187,7 @@ func LogoutHandlerV2(rw http.ResponseWriter, r *http.Request) {
 // Get a list of all users
 //
 // responses:
-//	200: OK
+//	200: User
 //  400: BadRequest
 
 func GetAllHandlerV2(rw http.ResponseWriter, r *http.Request) {
@@ -231,7 +231,7 @@ func GetAllHandlerV2(rw http.ResponseWriter, r *http.Request) {
 // Get a list of all users
 //
 // responses:
-//	200: OK
+//	200: User
 //  400: BadRequest
 
 // GetAllHandlerUpdated is for `/v1/getall`.
