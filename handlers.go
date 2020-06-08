@@ -12,6 +12,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// swagger:route PUT /products products updateProduct
+// Update a products details
+//
+// swagger:route PUT /products products updateProduct
+// Update a products details
+//
+// responses:
+//	201: noContentResponse
+
 // DefaultHandler is for handling everything
 func DefaultHandler(rw http.ResponseWriter, r *http.Request) {
 	log.Println("Serving:", r.URL.Path, "from", r.Host, "with method", r.Method)
