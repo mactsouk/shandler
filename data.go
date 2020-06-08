@@ -83,7 +83,7 @@ type UserPass struct {
 // Generic error message returned as an HTTP Status Code
 // swagger:response ErrorMessage
 type ErrorMessage struct {
-	// Description of the error
+	// Description of the situation
 	// in: body
 	Body int
 }
@@ -91,7 +91,7 @@ type ErrorMessage struct {
 // Generic OK message returned as an HTTP Status Code
 // swagger:response OK
 type OK struct {
-	// Description of the error
+	// Description of the situation
 	// in: body
 	Body int
 }
@@ -99,7 +99,7 @@ type OK struct {
 // Generic BadRequest message returned an HTTP Status Code
 // swagger:response BadRequest
 type BadRequest struct {
-	// Description of the error
+	// Description of the situation
 	// in: body
 	Body int
 }
