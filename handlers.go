@@ -12,8 +12,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// swagger:route /
+// swagger:route POST GET PUT / NULL
 // Default Handler for everything that is not a match
+//
 // responses:
 //	404: notFound
 
@@ -24,8 +25,9 @@ func DefaultHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// swagger:route GET PUT POST DELETE
+// swagger:route ALL GET /* NULL
 // Default Handler for endpoints used with incorrect HTTP request method
+//
 // responses:
 //	404: notFound
 
@@ -36,12 +38,14 @@ func MethodNotAllowedHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// swagger:route GET /v1/time /v2/time
+// swagger:route GET /v1/time NULL
 // Return current time
+//
 // responses:
 //	200: OK
+//	400: BadRequest
 
-// TimeHandler is for handling /time
+// TimeHandler is for handling /v1/time
 func TimeHandler(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(http.StatusOK)
 	t := time.Now().Format(time.RFC1123)
@@ -49,7 +53,14 @@ func TimeHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// AddHandler is for adding a new user
+// swagger:route POST /v1/add Input
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
+
+// AddHandler is for adding a new user /v1/add
 func AddHandler(rw http.ResponseWriter, r *http.Request) {
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -170,6 +181,13 @@ func GetAllHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// swagger:route GET /v1/getid UserPass
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
+
 // GetIDHandler returns the ID of an existing user
 func GetIDHandler(rw http.ResponseWriter, r *http.Request) {
 	d, err := ioutil.ReadAll(r.Body)
@@ -278,6 +296,13 @@ func UpdateHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// swagger:route POST /v1/login UserPass
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
+
 // LoginHandler is for updating the LastLogin time of a user
 // And changing the Active field to true
 func LoginHandler(rw http.ResponseWriter, r *http.Request) {
@@ -323,6 +348,13 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// swagger:route POST /v1/logout UserPass
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
+
 // LogoutHandler is for logging out a user
 // And changing the Active field to false
 func LogoutHandler(rw http.ResponseWriter, r *http.Request) {
@@ -363,6 +395,13 @@ func LogoutHandler(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusBadRequest)
 	}
 }
+
+// swagger:route GET /v1/logged UserPass
+// Get a list of logged in users
+//
+// responses:
+//	200: OK
+//  400: BadRequest
 
 // LoggedUsersHandler returns the list of currently logged in users
 func LoggedUsersHandler(rw http.ResponseWriter, r *http.Request) {

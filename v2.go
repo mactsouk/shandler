@@ -34,6 +34,14 @@ type V2Input struct {
 // IMAGESPATH defines the path where binary files are stored
 var IMAGESPATH string
 
+// swagger:route POST /v2/add V2Input
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
+
+// AddHandlerV2 is for adding new users /v2/add
 func AddHandlerV2(rw http.ResponseWriter, r *http.Request) {
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -71,6 +79,13 @@ func AddHandlerV2(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusBadRequest)
 	}
 }
+
+// swagger:route POST /v2/login V2Input
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
 
 func LoginHandlerV2(rw http.ResponseWriter, r *http.Request) {
 	d, err := ioutil.ReadAll(r.Body)
@@ -113,6 +128,13 @@ func LoginHandlerV2(rw http.ResponseWriter, r *http.Request) {
 		rw.WriteHeader(http.StatusBadRequest)
 	}
 }
+
+// swagger:route POST /v2/logout V2Input
+// Create a new user
+//
+// responses:
+//	200: OK
+//  400: BadRequest
 
 func LogoutHandlerV2(rw http.ResponseWriter, r *http.Request) {
 	d, err := ioutil.ReadAll(r.Body)
@@ -161,6 +183,13 @@ func LogoutHandlerV2(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// swagger:route GET /v2/getall V2Input Users
+// Get a list of all users
+//
+// responses:
+//	200: OK
+//  400: BadRequest
+
 func GetAllHandlerV2(rw http.ResponseWriter, r *http.Request) {
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -197,6 +226,13 @@ func GetAllHandlerV2(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+// swagger:route GET /v1/getall UserPass Users
+// Get a list of all users
+//
+// responses:
+//	200: OK
+//  400: BadRequest
 
 // GetAllHandlerUpdated is for `/v1/getall`.
 // The older version had a bug as it was using `IsUserValid` instead of `IsUserAdmin`.
@@ -236,6 +272,14 @@ func GetAllHandlerUpdated(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// swagger:route PUT /v2/files/{filename} NULL
+// Upload a new file
+//
+// responses:
+//	200: OK
+//	404: BadRequest
+
+// UploadFile is for uploading files to the server
 func UploadFile(rw http.ResponseWriter, r *http.Request) {
 	filename, ok := mux.Vars(r)["filename"]
 	if !ok {
