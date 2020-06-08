@@ -12,12 +12,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// swagger:route PUT /products products updateProduct
-// Update a products details
-//
-// swagger:route PUT /products products updateProduct
-// Update a products details
-//
+// swagger:route /
+// Default Handler for everything that is not a match
 // responses:
 //	404: notFound
 
@@ -28,12 +24,22 @@ func DefaultHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
+// swagger:route GET PUT POST DELETE
+// Default Handler for endpoints used with incorrect HTTP request method
+// responses:
+//	404: notFound
+
 // MethodNotAllowedHandler is executed when the HTTP method is not supported
 func MethodNotAllowedHandler(rw http.ResponseWriter, r *http.Request) {
 	rw.WriteHeader(http.StatusNotFound)
 	Body := "Method not allowed!\n"
 	fmt.Fprintf(rw, "%s", Body)
 }
+
+// swagger:route GET /v1/time /v2/time
+// Return current time
+// responses:
+//	200: OK
 
 // TimeHandler is for handling /time
 func TimeHandler(rw http.ResponseWriter, r *http.Request) {
