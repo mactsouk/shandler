@@ -35,7 +35,6 @@ type V2Input struct {
 var IMAGESPATH string
 
 func AddHandlerV2(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -202,7 +201,6 @@ func GetAllHandlerV2(rw http.ResponseWriter, r *http.Request) {
 // GetAllHandlerUpdated is for `/v1/getall`.
 // The older version had a bug as it was using `IsUserValid` instead of `IsUserAdmin`.
 func GetAllHandlerUpdated(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)

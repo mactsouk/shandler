@@ -19,19 +19,17 @@ import (
 // Update a products details
 //
 // responses:
-//	201: noContentResponse
+//	404: notFound
 
 // DefaultHandler is for handling everything
 func DefaultHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host, "with method", r.Method)
 	rw.WriteHeader(http.StatusNotFound)
 	Body := r.URL.Path + " is not supported. Thanks for visiting!\n"
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// MethodNotAllowedHandler is executed when the method is incorrect
+// MethodNotAllowedHandler is executed when the HTTP method is not supported
 func MethodNotAllowedHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host, "with method", r.Method)
 	rw.WriteHeader(http.StatusNotFound)
 	Body := "Method not allowed!\n"
 	fmt.Fprintf(rw, "%s", Body)
@@ -39,7 +37,6 @@ func MethodNotAllowedHandler(rw http.ResponseWriter, r *http.Request) {
 
 // TimeHandler is for handling /time
 func TimeHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	rw.WriteHeader(http.StatusOK)
 	t := time.Now().Format(time.RFC1123)
 	Body := "The current time is: " + t + "\n"
@@ -48,7 +45,6 @@ func TimeHandler(rw http.ResponseWriter, r *http.Request) {
 
 // AddHandler is for adding a new user
 func AddHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -88,7 +84,6 @@ func AddHandler(rw http.ResponseWriter, r *http.Request) {
 
 // DeleteHandler is for deleting an existing user + DELETE
 func DeleteHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	id, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Println("ID value not set!")
@@ -134,7 +129,6 @@ func DeleteHandler(rw http.ResponseWriter, r *http.Request) {
 
 // GetAllHandler is for getting all data from the user database
 func GetAllHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -172,8 +166,6 @@ func GetAllHandler(rw http.ResponseWriter, r *http.Request) {
 
 // GetIDHandler returns the ID of an existing user
 func GetIDHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
-
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -209,7 +201,6 @@ func GetIDHandler(rw http.ResponseWriter, r *http.Request) {
 
 // GetUserDataHandler + GET returns the full record of a user
 func GetUserDataHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	id, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Println("ID value not set!")
@@ -241,7 +232,6 @@ func GetUserDataHandler(rw http.ResponseWriter, r *http.Request) {
 
 // UpdateHandler is for updating the data of an existing user + PUT
 func UpdateHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -285,7 +275,6 @@ func UpdateHandler(rw http.ResponseWriter, r *http.Request) {
 // LoginHandler is for updating the LastLogin time of a user
 // And changing the Active field to true
 func LoginHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -331,8 +320,6 @@ func LoginHandler(rw http.ResponseWriter, r *http.Request) {
 // LogoutHandler is for logging out a user
 // And changing the Active field to false
 func LogoutHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
-
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		rw.WriteHeader(http.StatusBadRequest)
@@ -373,7 +360,6 @@ func LogoutHandler(rw http.ResponseWriter, r *http.Request) {
 
 // LoggedUsersHandler returns the list of currently logged in users
 func LoggedUsersHandler(rw http.ResponseWriter, r *http.Request) {
-	log.Println("Serving:", r.URL.Path, "from", r.Host)
 	var user = UserPass{}
 	err := user.FromJSON(r.Body)
 
