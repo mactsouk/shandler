@@ -27,9 +27,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// @title Authentication Swagger API
-// @version 1.0
-// @description Swagger API for Go Login Server.
 // @termsOfService http://swagger.io/terms/
 
 // swagger:route DELETE / Anything EMPTY

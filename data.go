@@ -96,7 +96,7 @@ type OK struct {
 	Body int
 }
 
-// Generic BadRequest message returned an HTTP Status Code
+// Generic BadRequest message returned as an HTTP Status Code
 // swagger:response BadRequest
 type BadRequest struct {
 	// Description of the situation
