@@ -12,7 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// swagger:route POST GET PUT / NULL
+// swagger:route ALL / NULL
 // Default Handler for everything that is not a match
 //
 // responses:
