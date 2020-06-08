@@ -14,10 +14,21 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// User defines the structure for the payload of V2 of the REST API
+// swagger:model
 type V2Input struct {
+	// The Username of the user issuing the command
+	//
+	// required: true
 	Username string `json:"username"`
+	// The Password of the user issuing the command
+	//
+	// required: true
 	Password string `json:"password"`
-	U        User   `json:"load"`
+	// The User that the command will affect
+	//
+	// required: false
+	U User `json:"load"`
 }
 
 // IMAGESPATH defines the path where binary files are stored
