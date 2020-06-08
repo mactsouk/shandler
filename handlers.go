@@ -1,3 +1,18 @@
+// Package shandler for Authentication Server
+//
+// Documentation for REST API
+//
+//	Schemes: http
+//	BasePath: /
+//	Version: 1.0.5
+//
+//	Consumes:
+//	- application/json
+//
+//	Produces:
+//	- application/json
+//
+// swagger:meta
 package shandler
 
 import (
@@ -12,11 +27,16 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// swagger:route ALL / NULL
+// @title Authentication Swagger API
+// @version 1.0
+// @description Swagger API for Go Login Server.
+// @termsOfService http://swagger.io/terms/
+
+// swagger:route DELETE / Anything EMPTY
 // Default Handler for everything that is not a match
 //
 // responses:
-//	404: notFound
+//	404: ErrorMessage
 
 // DefaultHandler is for handling everything
 func DefaultHandler(rw http.ResponseWriter, r *http.Request) {
@@ -25,11 +45,11 @@ func DefaultHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// swagger:route ALL GET /* NULL
+// swagger:route GET /* NULL
 // Default Handler for endpoints used with incorrect HTTP request method
 //
 // responses:
-//	404: notFound
+//	404: ErrorMessage
 
 // MethodNotAllowedHandler is executed when the HTTP method is not supported
 func MethodNotAllowedHandler(rw http.ResponseWriter, r *http.Request) {
@@ -38,7 +58,7 @@ func MethodNotAllowedHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// swagger:route GET /v1/time NULL
+// swagger:route GET /v1/time time NULL
 // Return current time
 //
 // responses:
@@ -53,7 +73,7 @@ func TimeHandler(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(rw, "%s", Body)
 }
 
-// swagger:route POST /v1/add Input
+// swagger:route POST /v1/add createUser Input
 // Create a new user
 //
 // responses:
@@ -181,7 +201,7 @@ func GetAllHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// swagger:route GET /v1/getid UserPass
+// swagger:route GET /v1/getid Username-Password UserPass
 // Create a new user
 //
 // responses:
@@ -296,7 +316,7 @@ func UpdateHandler(rw http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// swagger:route POST /v1/login UserPass
+// swagger:route POST /v1/login Username-Password UserPass
 // Create a new user
 //
 // responses:

@@ -12,23 +12,20 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// @title Authentication Swagger API
-// @version 1.0
-// @description Swagger API for Go Project Login Server.
-// @termsOfService http://swagger.io/terms/
-
 // SQLFILE defines the path of the SQLite3 database
 var SQLFILE = "/tmp/users.db"
 
 // User defines the structure for a Full User Record
-// swagger:model
+// swagger:model User
 type User struct {
 	// The ID for the User
+	// in: body
 	//
 	// required: false
 	// min: 1
 	ID int `json:"id"`
 	// The Username of the User
+	// in: body
 	//
 	// required: true
 	Username string `json:"user"`
@@ -52,13 +49,15 @@ type User struct {
 }
 
 // Input defines the structure for the user issuing a command
-// swagger:model
+// swagger:model Input
 type Input struct {
 	// The Username of the User
+	// in: body
 	//
 	// required: true
 	Username string `json:"user"`
 	// The Password of the User
+	// in: body
 	//
 	// required: true
 	Password string `json:"password"`
@@ -69,7 +68,7 @@ type Input struct {
 }
 
 // UserPass defines the structure for the user issuing a command
-// swagger:model
+// swagger:model UserPass
 type UserPass struct {
 	// The Username of the User
 	//
@@ -79,6 +78,30 @@ type UserPass struct {
 	//
 	// required: true
 	Password string `json:"password" validate:"required"`
+}
+
+// Generic error message returned as an HTTP Status Code
+// swagger:response ErrorMessage
+type ErrorMessage struct {
+	// Description of the error
+	// in: body
+	Body int
+}
+
+// Generic OK message returned as an HTTP Status Code
+// swagger:response OK
+type OK struct {
+	// Description of the error
+	// in: body
+	Body int
+}
+
+// Generic BadRequest message returned an HTTP Status Code
+// swagger:response BadRequest
+type BadRequest struct {
+	// Description of the error
+	// in: body
+	Body int
 }
 
 const (
